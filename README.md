@@ -44,55 +44,59 @@ The package installs the bot and all plugins under /usr/lib/TelegramWrt/.
 TelegramWrt includes the following modules, each triggered via a Telegram command:
 
 <markdown-accessiblity-table data-catalyst="">
-<table border="1">
-  <thead>
-    <tr>
-      <th>Telegram Command</th>
-      <th>Function</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>/ssh_status</td><td>Check if SSH is active and which port is used</td></tr>
-    <tr><td>/open_ports</td><td>List open ports and active services</td></tr>
-    <tr><td>/firewall_rules</td><td>Show current firewall rules</td></tr>
-    <tr><td>/block_ip</td><td>Block a specific IP address</td></tr>
-    <tr><td>/mac_watch</td><td>Alert if unknown MAC addresses connect</td></tr>
-    <tr><td>/vpn_status</td><td>Show VPN connection status</td></tr>
-    <tr><td>/devices</td><td>List connected devices via DHCP and Wi-Fi</td></tr>
-    <tr><td>/wifi_enable</td><td>Enable the router's WI-FI</td></tr>
-    <tr><td>/wifi_disable</td><td>Disable the router's WI-FI</td></tr>
-    <tr><td>/restart_wifi</td><td>Restart the router's WI-FI interface (useful to renew internet connection)</td></tr>
-    <tr><td>/restart_wan</td><td>Restart the router's WAN interface (renew internet connection)</td></tr>
-    <tr><td>/wan_stop</td><td>Disable the router's WAN interface (stop internet connection)</td></tr>
-    <tr><td>/wifi_status</td><td>Show wireless interface status</td></tr>
-    <tr><td>/wan_ip</td><td>Display public IP and gateway</td></tr>
-    <tr><td>/ping_sweep</td><td>Scan subnet for active IPs (confirmation required)</td></tr>
-    <tr><td>/ping_test</td><td>Run a ping test to an external host</td></tr>
-    <tr><td>/dns_status</td><td>Show current DNS configuration</td></tr>
-    <tr><td>/dhcp_leases</td><td>List active DHCP leases</td></tr>
-    <tr><td>/sms_receive</td><td>Reads SMS messages received by the modem (with automatic fallback and duplicate removal)</td>
-    <tr><td>/sms_delete</td><td>Deletes all received SMS messages from the modem and SIM memory (with port-aware verification)</td>
-    <tr><td>/tcpdump_dns</td><td>Capture DNS traffic for a short time. Shows client IP, DNS server, and requested domain. Only works if DNS is not encrypted.</td></tr>
-    <tr><td>/status</td><td>Show bot status and connection</td></tr>
-    <tr><td>/uptime</td><td>Display router uptime</td></tr>
-    <tr><td>/cpu_load</td><td>Show CPU load and temperature</td></tr>
-    <tr><td>/ram_usage</td><td>Display memory usage</td></tr>
-    <tr><td>/disk_space</td><td>Show available disk space</td></tr>
-    <tr><td>/log_tail</td><td>Show last system log entries</td></tr>
-    <tr><td>/reboot</td><td>Reboot the router</td></tr>
-    <tr><td>/restart_bot</td><td>Restart the Telegram bot</td></tr>
-    <tr><td>/update_bot</td><td>Update bot script from remote source</td></tr>
-    <tr><td>/backup_config</td><td>Backup OpenWrt configuration</td></tr>
-    <tr><td>/restore_config</td><td>Restore configuration from backup</td></tr>
-    <tr><td>/start</td><td>Show this command list</td></tr>
-    <tr><td>/help</td><td>Extended command descriptions</td></tr>
-    <tr><td>/opkg_installed</td><td>List installed packages (names only)</td></tr>
-    <tr><td>/opkg_update</td><td>Update package repositories</td></tr>
-    <tr><td>/opkg_install</td><td>Install a package from repository by name</td></tr>
-    <tr><td>/opkg_remove</td><td>Remove an installed package by name</td></tr>
-  </tbody>
-</table>
+  <table border="1" style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr>
+        <th scope="col" style="text-align: left; padding: 8px;">Telegram Command</th>
+        <th scope="col" style="text-align: left; padding: 8px;">Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding: 8px;">/ssh_status</td><td style="padding: 8px;">Check if SSH is active and which port is used</td></tr>
+      <tr><td style="padding: 8px;">/open_ports</td><td style="padding: 8px;">List open ports and active services</td></tr>
+      <tr><td style="padding: 8px;">/firewall_rules</td><td style="padding: 8px;">Show current firewall rules</td></tr>
+      <tr><td style="padding: 8px;">/block_ip</td><td style="padding: 8px;">Block a specific IP address</td></tr>
+      <tr><td style="padding: 8px;">/mac_watch</td><td style="padding: 8px;">Alert if unknown MAC addresses connect</td></tr>
+      <tr><td style="padding: 8px;">/vpn_status</td><td style="padding: 8px;">Show VPN connection status</td></tr>
+      <tr><td style="padding: 8px;">/vpn_start</td><td style="padding: 8px;">Enable VPN auto-start at boot, restart interfaces, and display public IP</td></tr>
+      <tr><td style="padding: 8px;">/vpn_stop</td><td style="padding: 8px;">Stop VPN interfaces and disable auto-start (with router reboot)</td></tr>
+      <tr><td style="padding: 8px;">/vpn_restart</td><td style="padding: 8px;">Restart VPN interfaces and show public IP</td></tr>
+      <tr><td style="padding: 8px;">/devices</td><td style="padding: 8px;">List connected devices via DHCP and Wi-Fi</td></tr>
+      <tr><td style="padding: 8px;">/wifi_enable</td><td style="padding: 8px;">Enable the router's Wi-Fi interface</td></tr>
+      <tr><td style="padding: 8px;">/wifi_disable</td><td style="padding: 8px;">Disable the router's Wi-Fi interface</td></tr>
+      <tr><td style="padding: 8px;">/restart_wifi</td><td style="padding: 8px;">Restart the router's Wi-Fi interface (useful to renew connection)</td></tr>
+      <tr><td style="padding: 8px;">/restart_wan</td><td style="padding: 8px;">Restart the router's WAN interface (renew Internet connection)</td></tr>
+      <tr><td style="padding: 8px;">/wan_stop</td><td style="padding: 8px;">Disable the router's WAN interface (stop Internet connection)</td></tr>
+      <tr><td style="padding: 8px;">/wifi_status</td><td style="padding: 8px;">Show wireless interface status</td></tr>
+      <tr><td style="padding: 8px;">/wan_ip</td><td style="padding: 8px;">Display public IP and gateway</td></tr>
+      <tr><td style="padding: 8px;">/ping_sweep</td><td style="padding: 8px;">Scan subnet for active IPs</td></tr>
+      <tr><td style="padding: 8px;">/ping_test</td><td style="padding: 8px;">Run a ping test to an external host</td></tr>
+      <tr><td style="padding: 8px;">/dns_status</td><td style="padding: 8px;">Show current DNS configuration</td></tr>
+      <tr><td style="padding: 8px;">/dhcp_leases</td><td style="padding: 8px;">List active DHCP leases</td></tr>
+      <tr><td style="padding: 8px;">/sms_receive</td><td style="padding: 8px;">Read SMS messages received by the modem (with automatic fallback)</td></tr>
+      <tr><td style="padding: 8px;">/sms_delete</td><td style="padding: 8px;">Delete all SMS messages from modem and SIM memory (with port-aware verification)</td></tr>
+      <tr><td style="padding: 8px;">/tcpdump_dns</td><td style="padding: 8px;">Capture DNS traffic briefly. Shows client IP, DNS server, and requested domain (only if DNS is not encrypted)</td></tr>
+      <tr><td style="padding: 8px;">/status</td><td style="padding: 8px;">Show bot status and connection</td></tr>
+      <tr><td style="padding: 8px;">/uptime</td><td style="padding: 8px;">Display router uptime</td></tr>
+      <tr><td style="padding: 8px;">/cpu_load</td><td style="padding: 8px;">Show CPU load and temperature</td></tr>
+      <tr><td style="padding: 8px;">/ram_usage</td><td style="padding: 8px;">Display memory usage</td></tr>
+      <tr><td style="padding: 8px;">/disk_space</td><td style="padding: 8px;">Show available disk space</td></tr>
+      <tr><td style="padding: 8px;">/log_tail</td><td style="padding: 8px;">Show last system log entries</td></tr>
+      <tr><td style="padding: 8px;">/reboot</td><td style="padding: 8px;">Reboot the router</td></tr>
+      <tr><td style="padding: 8px;">/restart_bot</td><td style="padding: 8px;">Restart the Telegram bot</td></tr>
+      <tr><td style="padding: 8px;">/update_bot</td><td style="padding: 8px;">Update bot script from remote source</td></tr>
+      <tr><td style="padding: 8px;">/backup_config</td><td style="padding: 8px;">Backup OpenWrt configuration</td></tr>
+      <tr><td style="padding: 8px;">/restore_config</td><td style="padding: 8px;">Restore configuration from backup</td></tr>
+      <tr><td style="padding: 8px;">/start</td><td style="padding: 8px;">Show this command list</td></tr>
+      <tr><td style="padding: 8px;">/help</td><td style="padding: 8px;">Extended command descriptions</td></tr>
+      <tr><td style="padding: 8px;">/opkg_installed</td><td style="padding: 8px;">List installed packages (names only)</td></tr>
+      <tr><td style="padding: 8px;">/opkg_update</td><td style="padding: 8px;">Update package repositories</td></tr>
+      <tr><td style="padding: 8px;">/opkg_install</td><td style="padding: 8px;">Install a package from repository by name</td></tr>
+      <tr><td style="padding: 8px;">/opkg_remove</td><td style="padding: 8px;">Remove an installed package by name</td></tr>
+    </tbody>
+  </table>
 </markdown-accessiblity-table>
+
 
 
 # 📤 Usage Example
