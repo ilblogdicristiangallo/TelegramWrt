@@ -150,13 +150,13 @@ Password: (your router password)
 
 Connect and navigate to the /tmp directory on the router.
 
-Drag and drop the telegramwrt_1.0.3_all.ipk file from your PC into the router’s /tmp folder.
+Drag and drop the telegramwrt_1.0.5_all.ipk file from your PC into the router’s /tmp folder.
 
 Open a terminal session directly from WinSCP (menu “Commands” → “Open Terminal”) or use PuTTY.
 
 Install the package with the command:
 
-<pre>opkg install /tmp/telegramwrt_1.0.3_all.ipk
+<pre>opkg install /tmp/telegramwrt_1.0.5_all.ipk
 </pre>
 
 # Screen use TelegramWrt_V1.0.5
