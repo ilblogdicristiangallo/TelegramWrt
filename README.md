@@ -122,10 +122,6 @@ Open the rc.local file with a text editor:
 Insert the command before the line exit 0:
 
 <pre>bash /usr/lib/TelegramWrt/telegram.sh &</pre>
-# News v1.0.2 message_reboot
-<pre>bash /usr/lib/TelegramWrt/plugins/message_router &</pre>
-# or 
-<pre>sh /usr/lib/TelegramWrt/plugins/message_router &</pre>
 
 Save and exit (ctrt+c, then :wq!).
 
@@ -165,27 +161,16 @@ Install the package with the command:
 
 # Screen use TelegramWrt_V1.0.5
 
-<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/telegramwrt-v.1.0.4.png?raw=true" 
+<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/Screenshot_telegramwrt_1.0.5.png?raw=true" 
      alt="TelegramWrt bot interface screenshot" 
      width="600" />
 
-<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/telegramwrt-v.1.0.4_1.png?raw=true" 
+<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/Screenshot_telegramwrt_1.0.5-2.png?raw=true" 
      alt="TelegramWrt bot interface second screenshot" 
      width="600" />
 
-<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/telegramwrt-v.1.0.4_2.png?raw=true" 
+<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenShot/Screenshot_telegramwrt_1.0.5-3.png?raw=true" 
      alt="TelegramWrt bot interface second screenshot" 
-     width="600" />
-
-# News reboot message V1.0.2
-
-<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/ScreenTelegramWrt1.0.2._3.png?raw=true" 
-     alt="TelegramWrt reboot message screenshot" 
-     width="600" />
-
-# News sms V1.0.3
-<img src="https://github.com/ilblogdicristiangallo/TelegramWrt/blob/main/telegramwrt_1.0.3_sms_screen.png?raw=true"
-     alt="TelegramWrt sms message screenshot" 
      width="600" />
 
 # Visit my blog
