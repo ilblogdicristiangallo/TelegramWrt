@@ -1,0 +1,34 @@
+#!/bin/sh
+# Plugin /vpn_stop for TelegramWrt
+
+LOG="/var/log/vpn_control.log"
+TIME=$(date '+%Y-%m-%d %H:%M:%S')
+
+VPN_IFACES=$(uci show network | grep "=interface" | grep -Ei '\.wg[0-9]*|\.tun[0-9]*|\.vpn|\.ovpn|\.openvpn' \
+    | cut -d. -f2 | cut -d= -f1 | sort -u)
+
+if [ -z "$VPN_IFACES" ]; then
+    echo "❌ No VPN interfaces found. Nothing to stop."
+    echo "[$TIME] ❌ No VPN interfaces found in UCI" >> "$LOG"
+    exit 1
+fi
+
+MSG="🛑 VPN interfaces stopped and auto-start disabled:"
+for IFACE in $VPN_IFACES; do
+    ifdown "$IFACE"
+    if [ $? -eq 0 ]; then
+        uci set network.$IFACE.auto='0'
+        MSG="${MSG}\n✅ $IFACE disabled (auto-start OFF)"
+        echo "[$TIME] ✅ Interface '$IFACE' disabled (auto=0)" >> "$LOG"
+    else
+        MSG="${MSG}\n⚠️ Error disabling $IFACE"
+        echo "[$TIME] ⚠️ Error disabling interface '$IFACE'" >> "$LOG"
+    fi
+done
+
+uci commit network
+
+# Salva messaggio con newline reali
+printf "%b\n" "$MSG" > /etc/vpn_notify.msg
+
+reboot

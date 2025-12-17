@@ -1,6 +1,5 @@
 #!/bin/sh
-# Plugin /start per TelegramWrt
-# Mostra la lista dei comandi disponibili
+# Plugin /start per TelegramWrt – mostra i comandi disponibili
 
 echo "Welcome to TelegramWrt 👋"
 echo ""
@@ -14,17 +13,26 @@ echo "/firewall_rules   – Show current firewall rules"
 echo "/block_ip         – Block a specific IP address"
 echo "/mac_watch        – Alert if unknown MAC addresses connect"
 echo "/vpn_status       – Show VPN connection status"
+echo "/vpn_start        – 🔓 Enable VPN auto-start at boot (no restart)"
+echo "/vpn_stop         – 🛑 Disable VPN auto-start and stop interfaces (with reboot)"
 echo ""
 
 echo "📡 Network & Connectivity"
 echo "/devices          – List connected devices via DHCP and Wi-Fi"
+echo "/wifi_enable      – 🔓 Enable the router's Wi-Fi interface"
+echo "/wifi_disable     – 🔒 Disable the router's Wi-Fi interface"
+echo "/restart_wifi     – 🔄 Restart the router's Wi-Fi interface (useful to renew wireless connection)"
+echo "/restart_wan      – 🔄 Restart the router's WAN interface (renew Internet connection)"
+echo "/wan_stop         – 🛑 Disable the router's WAN interface (stop Internet connection)"
 echo "/wifi_status      – Show wireless interface status"
 echo "/wan_ip           – Display public IP and gateway"
 echo "/ping_sweep       – Scan subnet for active IPs (confirmation only)"
 echo "/ping_test        – Run a ping test to external host"
 echo "/dns_status       – Show current DNS configuration"
 echo "/dhcp_leases      – List active DHCP leases"
-echo "/tcpdump_dns      – Capture DNS traffic for a short time. Shows client IP, DNS server, and requested domain. Only works if DNS is not encrypted."
+echo "/sms_receive      – 📩 Read SMS messages received by the modem (with automatic fallback)"
+echo "/sms_delete       – 🗑️ Delete all SMS messages from modem and SIM memory (automatic port scan)"
+echo "/tcpdump_dns      – Capture DNS traffic briefly (only works if DNS is not encrypted)"
 echo ""
 
 echo "🛠️ System Diagnostics"
