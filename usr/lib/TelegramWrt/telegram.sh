@@ -38,6 +38,18 @@ fi
 
 log "Bot started. Waiting for commands..."
 
+# 🔔 Controllo messaggi di notifica al boot
+if [ -f /etc/vpn_notify.msg ]; then
+    OUTPUT=$(cat /etc/vpn_notify.msg)
+    rm /etc/vpn_notify.msg
+
+    # Invia il messaggio su Telegram
+    curl -s -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+        -d "chat_id=$CHAT_ID" --data-urlencode "text=$OUTPUT" > /dev/null
+
+    log "Boot notification sent to Telegram."
+fi
+
 # Loop principale
 while true; do
     RESPONSE=$(curl -s "https://api.telegram.org/bot$TOKEN/getUpdates?offset=$OFFSET&timeout=60")
@@ -52,7 +64,7 @@ while true; do
     TEXT=$(echo "$MESSAGE" | jq -r '.message.text // empty')
     CHAT_ID=$(echo "$MESSAGE" | jq -r '.message.chat.id // empty')
 
-    # Se non   testo, passa al prossimo
+    # Se non c'è testo, passa al prossimo
     if [ -z "$TEXT" ]; then
         OFFSET=$((UPDATE_ID + 1))
         echo "$OFFSET" > "$OFFSET_FILE"
@@ -82,3 +94,4 @@ while true; do
     OFFSET=$((UPDATE_ID + 1))
     echo "$OFFSET" > "$OFFSET_FILE"
 done
+
