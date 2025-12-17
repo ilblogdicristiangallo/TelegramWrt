@@ -60,7 +60,6 @@ TelegramWrt includes the following modules, each triggered via a Telegram comman
       <tr><td style="padding: 8px;">/vpn_status</td><td style="padding: 8px;">Show VPN connection status</td></tr>
       <tr><td style="padding: 8px;">/vpn_start</td><td style="padding: 8px;">Enable VPN auto-start at boot, restart interfaces, and display public IP</td></tr>
       <tr><td style="padding: 8px;">/vpn_stop</td><td style="padding: 8px;">Stop VPN interfaces and disable auto-start (with router reboot)</td></tr>
-      <tr><td style="padding: 8px;">/vpn_restart</td><td style="padding: 8px;">Restart VPN interfaces and show public IP</td></tr>
       <tr><td style="padding: 8px;">/devices</td><td style="padding: 8px;">List connected devices via DHCP and Wi-Fi</td></tr>
       <tr><td style="padding: 8px;">/wifi_enable</td><td style="padding: 8px;">Enable the router's Wi-Fi interface</td></tr>
       <tr><td style="padding: 8px;">/wifi_disable</td><td style="padding: 8px;">Disable the router's Wi-Fi interface</td></tr>
