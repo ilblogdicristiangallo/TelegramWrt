@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "🔐 Firewall Rules:"
+echo ""
+
+uci show firewall | grep -E 'rule|name|src|dest|proto|target' | sed 's/^/• /'

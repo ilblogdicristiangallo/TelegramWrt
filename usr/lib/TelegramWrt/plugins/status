@@ -1,0 +1,28 @@
+#!/bin/sh
+
+echo "🛠️ TelegramWrt Bot Status:"
+echo ""
+
+# Verifica se il processo telegram.sh è attivo
+BOT_PROC=$(ps | grep -v grep | grep telegram.sh)
+
+if [ -n "$BOT_PROC" ]; then
+  echo "✅ Bot process is running."
+else
+  echo "❌ Bot process not found."
+fi
+
+# Verifica se il file di configurazione esiste
+CONFIG="/usr/lib/TelegramWrt/config"
+if [ -f "$CONFIG" ]; then
+  TOKEN=$(grep token "$CONFIG" | cut -d= -f2)
+  CHAT_ID=$(grep chat_id "$CONFIG" | cut -d= -f2)
+  OFFSET=$(grep offset "$CONFIG" | cut -d= -f2)
+
+  echo ""
+  echo "• Token: ${TOKEN:+[OK]}"
+  echo "• Chat ID: ${CHAT_ID:+$CHAT_ID}"
+  echo "• Offset: ${OFFSET:-Not set}"
+else
+  echo "⚠️ Config file not found: $CONFIG"
+fi

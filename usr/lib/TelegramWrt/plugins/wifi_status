@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "📡 Wi-Fi Interface Status:"
+echo ""
+
+for iface in $(iwinfo | grep "ESSID" | cut -d' ' -f1); do
+  echo "🔸 Interface: $iface"
+  iwinfo "$iface" info | grep -E 'ESSID|Mode|Channel|Tx-Power|Signal|Quality|Encryption' | sed 's/^/• /'
+  echo ""
+done

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "🔐 Open Ports & Listening Services:"
+echo ""
+
+# Usa ss se disponibile, altrimenti fallback su netstat
+if command -v ss >/dev/null 2>&1; then
+  ss -tuln | awk 'NR==1 || /LISTEN|UNCONN/ {print}'
+else
+  netstat -tuln | awk 'NR==2 || /LISTEN/ {print}'
+fi

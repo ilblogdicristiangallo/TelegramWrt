@@ -1,0 +1,40 @@
+#!/bin/sh
+
+#############################################
+# 0️⃣ USAGE SE MANCANO ARGOMENTI
+#############################################
+case "$1" in
+    ""|"/set_prefix"|"set_prefix")
+        echo "🔧 Usage:"
+        echo "/set_prefix <country_prefix>"
+        echo ""
+        echo "Example:"
+        echo "/set_prefix 39"
+        exit 0
+    ;;
+esac
+
+#############################################
+# 1️⃣ VALIDAZIONE PREFISSO
+#############################################
+PREFIX=$(echo "$1" | tr -cd '0-9')
+
+if [ -z "$PREFIX" ]; then
+    echo "❌ Invalid prefix. Only numbers allowed."
+    exit 0
+fi
+
+#############################################
+# 2️⃣ SCRITTURA NELLA CONFIGURAZIONE
+#############################################
+uci set sms_tool_js.@sms_tool_js[0].pnumber="$PREFIX"
+uci commit sms_tool_js
+
+#############################################
+# 3️⃣ RISPOSTA
+#############################################
+echo "✅ SMS prefix updated successfully."
+echo "New prefix: $PREFIX"
+
+exit 0
+

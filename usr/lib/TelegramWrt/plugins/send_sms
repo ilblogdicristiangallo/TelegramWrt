@@ -1,0 +1,55 @@
+#!/bin/sh
+
+SMS_TOOL="/usr/bin/sms_tool"
+
+# Porta modem da UCI
+MODULE=$(uci get sms_tool_js.@sms_tool_js[0].sendport 2>/dev/null)
+[ -z "$MODULE" ] && MODULE="/dev/ttyUSB1"
+
+#############################################
+# 0️⃣ USAGE SE MANCANO ARGOMENTI
+#############################################
+case "$1" in
+    ""|"/send_sms"|"send_sms")
+        echo "📨 Usage:"
+        echo "/send_sms <number_with_prefix> <text>"
+        echo ""
+        echo "Example:"
+        echo "/send_sms 393401234567 Hello"
+        exit 0
+    ;;
+esac
+
+#############################################
+# 1️⃣ PARSING NUMERO E TESTO
+#############################################
+NUM=$(echo "$1" | tr -cd '0-9')
+TEXT=$(echo "$@" | cut -d' ' -f2-)
+
+[ -z "$NUM" ] && { echo "❌ Invalid number."; exit 0; }
+[ -z "$TEXT" ] && { echo "❌ Missing SMS text."; exit 0; }
+
+#############################################
+# 2️⃣ CONTROLLO PORTA MODEM
+#############################################
+if [ ! -e "$MODULE" ]; then
+    echo "❌ Modem port not found: $MODULE"
+    exit 0
+fi
+
+#############################################
+# 3️⃣ INVIO SMS (NESSUN TEST AT)
+#############################################
+RESULT=$($SMS_TOOL -d "$MODULE" send "$NUM" "$TEXT" 2>&1)
+
+# sms_tool ha un bug: scrive "sucessfully" senza la seconda C
+echo "$RESULT" | grep -qi "sucess\|success"
+if [ $? -eq 0 ]; then
+    echo "✅ SMS successfully sent to $NUM"
+else
+    echo "❌ Failed to send SMS."
+    echo "Error: $RESULT"
+fi
+
+exit 0
+

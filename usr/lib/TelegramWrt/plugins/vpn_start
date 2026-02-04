@@ -1,0 +1,40 @@
+#!/bin/sh
+# Plugin /vpn_start for TelegramWrt
+# Abilita VPN al boot, la riavvia e mostra IP pubblico reale
+
+LOG="/var/log/vpn_control.log"
+TIME=$(date '+%Y-%m-%d %H:%M:%S')
+
+VPN_IFACES=$(uci show network | grep "=interface" | grep -Ei '\.wg[0-9]*|\.tun[0-9]*|\.vpn|\.ovpn|\.openvpn' \
+    | cut -d. -f2 | cut -d= -f1 | sort -u)
+
+if [ -z "$VPN_IFACES" ]; then
+    echo "❌ No VPN interfaces found. Nothing to start."
+    echo "[$TIME] ❌ No VPN interfaces found in UCI" >> "$LOG"
+    exit 1
+fi
+
+MSG="🚀 VPN interfaces restarted and auto-start enabled:"
+for IFACE in $VPN_IFACES; do
+    uci set network.$IFACE.auto='1'
+    ifdown "$IFACE" >/dev/null 2>&1
+    sleep 1
+    ifup "$IFACE" >/dev/null 2>&1
+    sleep 2
+
+    # Ottieni IP pubblico usando curl forzando l'interfaccia
+    PUBIP=$(curl -s --interface "$IFACE" https://api.ipify.org)
+
+    if [ -n "$PUBIP" ]; then
+        MSG="${MSG}\n✅ $IFACE is UP — Public IP: $PUBIP"
+        echo "[$TIME] ✅ $IFACE is UP — Public IP: $PUBIP" >> "$LOG"
+    else
+        MSG="${MSG}\n⚠️ $IFACE failed or no public IP"
+        echo "[$TIME] ⚠️ $IFACE failed or no public IP" >> "$LOG"
+    fi
+done
+
+uci commit network
+
+# Output diretto su Telegram
+printf "%b\n" "$MSG"

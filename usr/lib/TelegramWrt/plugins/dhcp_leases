@@ -1,0 +1,23 @@
+#!/bin/sh
+
+LEASES="/tmp/dhcp.leases"
+
+echo "📋 DHCP Lease Table:"
+echo ""
+
+if [ ! -f "$LEASES" ]; then
+  echo "⚠️ Lease file not found: $LEASES"
+  exit 1
+fi
+
+if [ ! -s "$LEASES" ]; then
+  echo "⚠️ No active DHCP leases found."
+  exit 0
+fi
+
+awk '{
+  printf "• IP: %s | MAC: %s", $3, $2;
+  if ($4) printf " | Hostname: %s", $4;
+  print "";
+}' "$LEASES"
+

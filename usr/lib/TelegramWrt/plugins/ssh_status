@@ -1,0 +1,11 @@
+#!/bin/sh
+
+PORT=$(uci get dropbear.@dropbear[0].Port 2>/dev/null)
+STATUS=$(ps | grep -v grep | grep dropbear)
+
+echo "🔐 SSH Status:"
+if [ -n "$STATUS" ]; then
+  echo "SSH is running on port ${PORT:-22}."
+else
+  echo "SSH is not active."
+fi

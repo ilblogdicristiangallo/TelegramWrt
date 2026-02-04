@@ -1,0 +1,29 @@
+#!/bin/sh
+# Plugin /wifi_enable for TelegramWrt
+# Enable the router's Wi-Fi interface, with existence check
+
+LOG="/var/log/wifi_control.log"
+TIME=$(date '+%Y-%m-%d %H:%M:%S')
+
+# Check if wireless configuration exists
+uci show wireless > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "[$TIME] ❌ Unable to enable Wi-Fi interface (not found)" >> "$LOG"
+    echo "❌ Unable to enable Wi-Fi interface."
+    exit 1
+fi
+
+echo "🔓 Enabling Wi-Fi interface..."
+
+wifi up
+
+if [ $? -eq 0 ]; then
+    echo "[$TIME] ✅ Wi-Fi enabled successfully" >> "$LOG"
+    echo "✅ Wi-Fi enabled successfully."
+else
+    echo "[$TIME] ⚠️ Error enabling Wi-Fi" >> "$LOG"
+    echo "⚠️ Error enabling Wi-Fi."
+fi
+
+exit 0
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+HOST="${1:-8.8.8.8}"
+
+echo "📡 Ping Test to $HOST:"
+echo ""
+
+ping -c 4 "$HOST" 2>&1 | grep -E 'bytes from|packet loss|time|rtt'

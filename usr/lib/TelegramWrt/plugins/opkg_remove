@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PKG="$1"
+
+# ⚠️ No package name provided
+if [ -z "$PKG" ]; then
+  echo "⚠️ Please specify a package name: /opkg_remove <name>"
+  exit 1
+fi
+
+# ✅ Check if the package is installed
+if opkg list-installed | awk '{print $1}' | grep -qx "$PKG"; then
+  if opkg remove "$PKG" >/dev/null 2>&1; then
+    echo "✅ Package '$PKG' removed successfully."
+  else
+    echo "⚠️ Failed to remove package '$PKG'. Check dependencies or permissions."
+  fi
+else
+  echo "❌ Package '$PKG' is not installed or the name is incorrect."
+fi

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+WHITELIST="/usr/lib/TelegramWrt/mac_whitelist.txt"
+LEASES="/tmp/dhcp.leases"
+
+echo "🔐 MAC Watch – Unauthorized Devices:"
+echo ""
+
+if [ ! -f "$WHITELIST" ]; then
+  echo "⚠️ Whitelist file not found: $WHITELIST"
+  exit 1
+fi
+
+if [ ! -f "$LEASES" ]; then
+  echo "⚠️ DHCP lease file not found: $LEASES"
+  exit 1
+fi
+
+awk '{print $2}' "$LEASES" | while read MAC; do
+  if ! grep -iq "$MAC" "$WHITELIST"; then
+    echo "❌ Unauthorized MAC detected: $MAC"
+  fi
+done

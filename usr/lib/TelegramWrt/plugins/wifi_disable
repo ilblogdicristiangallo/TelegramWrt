@@ -1,0 +1,29 @@
+#!/bin/sh
+# Plugin /wifi_disable for TelegramWrt
+# Disable the router's Wi-Fi interface, with existence check
+
+LOG="/var/log/wifi_control.log"
+TIME=$(date '+%Y-%m-%d %H:%M:%S')
+
+# Check if wireless configuration exists
+uci show wireless > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "[$TIME] ❌ Unable to disable Wi-Fi interface (not found)" >> "$LOG"
+    echo "❌ Unable to disable Wi-Fi interface."
+    exit 1
+fi
+
+echo "🔒 Disabling Wi-Fi interface..."
+
+wifi down
+
+if [ $? -eq 0 ]; then
+    echo "[$TIME] ✅ Wi-Fi disabled successfully" >> "$LOG"
+    echo "✅ Wi-Fi disabled successfully."
+else
+    echo "[$TIME] ⚠️ Error disabling Wi-Fi" >> "$LOG"
+    echo "⚠️ Error disabling Wi-Fi."
+fi
+
+exit 0
+

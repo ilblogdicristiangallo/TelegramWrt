@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Carica configurazione
+CONFIG="/usr/lib/TelegramWrt/config"
+if [ ! -f "$CONFIG" ]; then
+    logger -t message_router "❌ File di configurazione mancante: $CONFIG"
+    exit 1
+fi
+
+. "$CONFIG"
+
+# Verifica che TOKEN e CHAT_ID siano impostati
+if [ -z "$TOKEN" ] || [ -z "$CHAT_ID" ]; then
+    logger -t message_router "❌ TOKEN o CHAT_ID non impostati nel config"
+    exit 1
+fi
+
+MESSAGE="✅ The router has powered on successfully and is available again!"
+
+# Attendi connessione Internet
+while ! ping -c 1 -W 5 8.8.8.8 >/dev/null 2>&1; do
+    sleep 5
+done
+
+# Invia il messaggio Telegram usando CHAT_ID
+curl -s -m 10 -X POST "https://api.telegram.org/bot$TOKEN/sendMessage" \
+     -d "chat_id=$CHAT_ID" \
+     -d "text=$MESSAGE" \
+     -d "parse_mode=Markdown" >/dev/null 2>&1
+
+logger -t message_router "✅ Messaggio di riavvio inviato."

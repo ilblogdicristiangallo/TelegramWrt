@@ -1,0 +1,57 @@
+#!/bin/sh
+
+PORTS="/dev/ttyUSB1 /dev/ttyUSB2"
+LOG="/var/log/sms_dispatcher.log"
+TMP="/tmp/sms_summary.$$"
+SEEN="/tmp/sms_seen.$$"
+COUNT=0
+
+echo "📩 SMS received:" > "$TMP"
+touch "$SEEN"
+
+for DEVICE in $PORTS; do
+    MESSAGES=$(sms_tool -d "$DEVICE" -s MT recv 2>/dev/null)
+    echo "$MESSAGES" > /tmp/sms_raw.$$
+
+    while IFS= read -r LINE; do
+        case "$LINE" in
+            MSG:*)
+                MSG_ID=$(echo "$LINE" | cut -d':' -f2 | tr -d ' ')
+                ;;
+            From:*)
+                FROM=$(echo "$LINE" | cut -d':' -f2 | tr -d ' ')
+                ;;
+            Date/Time:*)
+                DATETIME=$(echo "$LINE" | cut -d':' -f2- | tr -d ' ')
+                ;;
+            *)
+                TEXT="$LINE"
+                KEY="$FROM|$TEXT"
+                if [ -n "$FROM" ] && [ -n "$TEXT" ] && ! grep -Fxq "$KEY" "$SEEN"; then
+                    TIME=$(date '+%Y-%m-%d %H:%M:%S')
+                    echo "[$TIME] SMS da $FROM: '$TEXT'" >> "$LOG"
+                    echo "[$TIME]" >> "$TMP"
+                    echo "From: $FROM" >> "$TMP"
+                    echo "Message: $TEXT" >> "$TMP"
+                    echo "---" >> "$TMP"
+                    echo "$KEY" >> "$SEEN"
+                    COUNT=$((COUNT + 1))
+                fi
+                MSG_ID=""; FROM=""; DATETIME=""; TEXT=""
+                ;;
+        esac
+    done < /tmp/sms_raw.$$
+    rm -f /tmp/sms_raw.$$
+done
+
+rm -f "$SEEN"
+
+if [ "$COUNT" -gt 0 ]; then
+    cat "$TMP"
+else
+    echo "❌ No SMS received from /dev/ttyUSB1 or /dev/ttyUSB2."
+fi
+
+rm -f "$TMP"
+exit 0
+

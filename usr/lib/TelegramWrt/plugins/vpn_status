@@ -1,0 +1,29 @@
+#!/bin/sh
+# Plugin /vpn_status for TelegramWrt
+
+echo "🔐 VPN Status:"
+echo ""
+
+# Trova tutte le interfacce VPN configurate in UCI
+VPN_IFACES=$(uci show network | grep "=interface" | grep -Ei '\.wg[0-9]*|\.tun[0-9]*|\.vpn|\.ovpn|\.openvpn' | cut -d. -f2 | cut -d= -f1 | sort -u)
+
+if [ -z "$VPN_IFACES" ]; then
+    echo "❌ No VPN interfaces configured."
+    exit 1
+fi
+
+FOUND=0
+for IFACE in $VPN_IFACES; do
+    STATUS=$(ifstatus "$IFACE" | grep '"up": true')
+    if [ -n "$STATUS" ]; then
+        echo "✅ VPN interface '$IFACE' is UP."
+        FOUND=1
+    else
+        echo "⚠️ VPN interface '$IFACE' is configured but DOWN."
+    fi
+done
+
+if [ $FOUND -eq 0 ]; then
+    echo "❌ No active VPN connections detected."
+fi
+

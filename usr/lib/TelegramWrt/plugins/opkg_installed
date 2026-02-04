@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Estrae solo i nomi dei pacchetti installati
+PKGS=$(opkg list-installed | awk '{print $1}')
+
+if [ -z "$PKGS" ]; then
+  echo "📦 No packages are currently installed."
+else
+  echo "📦 Installed packages:"
+  echo "$PKGS"
+fi

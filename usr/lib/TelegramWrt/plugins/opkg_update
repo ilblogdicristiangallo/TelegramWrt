@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Esegue aggiornamento repository pacchetti
+if opkg update >/dev/null 2>&1; then
+  echo "📦 Repository pacchetti aggiornato con successo!"
+else
+  echo "⚠️ Errore durante l'aggiornamento dei repository. Controlla la connessione o i DNS."
+fi

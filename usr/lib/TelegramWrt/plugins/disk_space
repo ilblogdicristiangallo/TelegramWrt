@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "🛠️ Disk Space Usage:"
+echo ""
+
+df -h | awk 'NR==1 || /^\/dev/ {print "• " $0}'
