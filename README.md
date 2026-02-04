@@ -73,7 +73,7 @@ TelegramWrt includes the following modules, each triggered via a Telegram comman
       <tr><td style="padding: 8px;">/dns_status</td><td style="padding: 8px;">Show current DNS configuration</td></tr>
       <tr><td style="padding: 8px;">/dhcp_leases</td><td style="padding: 8px;">List active DHCP leases</td></tr>
       <tr><td style="padding: 8px;">/set_prefix</td><td style="padding: 8px;"> Change SMS country prefix for sms-tool</td></tr>
-      <tr><td style="padding: 8px;">/send_sms</td><td style="padding: 8px;"> Send an SMS using sms-tool.js"</td></tr>
+      <tr><td style="padding: 8px;">/send_sms</td><td style="padding: 8px;"> Send an SMS using sms-tool.js</td></tr>
       <tr><td style="padding: 8px;">/sms_receive</td><td style="padding: 8px;">Read SMS messages received by the modem (with automatic fallback)</td></tr>
       <tr><td style="padding: 8px;">/sms_delete</td><td style="padding: 8px;">Delete all SMS messages from modem and SIM memory (with port-aware verification)</td></tr>
       <tr><td style="padding: 8px;">/tcpdump_dns</td><td style="padding: 8px;">Capture DNS traffic briefly. Shows client IP, DNS server, and requested domain (only if DNS is not encrypted)</td></tr>
