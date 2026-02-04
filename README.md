@@ -16,9 +16,9 @@ opkg install bash
 opkg install tcpdump
 </pre>
 
-## 📦 Requirements V1.0.5 (Dependency auto-install)
+## 📦 Requirements V1.0.6 (Dependency auto-install)
 <pre>opkg update
-opkg /tmp/install telegramwrt_1.0.5_all.ipk</pre>
+opkg /tmp/install telegramwrt_1.0.6_all.ipk</pre>
 
 ⚙️ Initial Configuration
 After installation, configure the bot by editing the file:
@@ -35,7 +35,7 @@ CHAT_ID="987654321"
 
 # 🚀 Installation
 Install the .ipk package with:
-<pre>opkg install /tmp/telegramwrt_1.0.5_all.ipk
+<pre>opkg install /tmp/telegramwrt_1.0.6_all.ipk
 </pre>
 
 The package installs the bot and all plugins under /usr/lib/TelegramWrt/.
@@ -50,7 +50,7 @@ TelegramWrt includes the following modules, each triggered via a Telegram comman
         <th scope="col" style="text-align: left; padding: 8px;">Telegram Command</th>
         <th scope="col" style="text-align: left; padding: 8px;">Function</th>
       </tr>
-    </thead>
+    </thead>  
     <tbody>
       <tr><td style="padding: 8px;">/ssh_status</td><td style="padding: 8px;">Check if SSH is active and which port is used</td></tr>
       <tr><td style="padding: 8px;">/open_ports</td><td style="padding: 8px;">List open ports and active services</td></tr>
@@ -72,6 +72,8 @@ TelegramWrt includes the following modules, each triggered via a Telegram comman
       <tr><td style="padding: 8px;">/ping_test</td><td style="padding: 8px;">Run a ping test to an external host</td></tr>
       <tr><td style="padding: 8px;">/dns_status</td><td style="padding: 8px;">Show current DNS configuration</td></tr>
       <tr><td style="padding: 8px;">/dhcp_leases</td><td style="padding: 8px;">List active DHCP leases</td></tr>
+      <tr><td style="padding: 8px;">/set_prefix</td><td style="padding: 8px;"> Change SMS country prefix for sms-tool</td></tr>
+      <tr><td style="padding: 8px;">/send_sms</td><td style="padding: 8px;"> Send an SMS using sms-tool.js"</td></tr>
       <tr><td style="padding: 8px;">/sms_receive</td><td style="padding: 8px;">Read SMS messages received by the modem (with automatic fallback)</td></tr>
       <tr><td style="padding: 8px;">/sms_delete</td><td style="padding: 8px;">Delete all SMS messages from modem and SIM memory (with port-aware verification)</td></tr>
       <tr><td style="padding: 8px;">/tcpdump_dns</td><td style="padding: 8px;">Capture DNS traffic briefly. Shows client IP, DNS server, and requested domain (only if DNS is not encrypted)</td></tr>
@@ -149,13 +151,13 @@ Password: (your router password)
 
 Connect and navigate to the /tmp directory on the router.
 
-Drag and drop the telegramwrt_1.0.5_all.ipk file from your PC into the router’s /tmp folder.
+Drag and drop the telegramwrt_1.0.6_all.ipk file from your PC into the router’s /tmp folder.
 
 Open a terminal session directly from WinSCP (menu “Commands” → “Open Terminal”) or use PuTTY.
 
 Install the package with the command:
 
-<pre>opkg install /tmp/telegramwrt_1.0.5_all.ipk
+<pre>opkg install /tmp/telegramwrt_1.0.6_all.ipk
 </pre>
 
 # Screen use TelegramWrt_V1.0.5
