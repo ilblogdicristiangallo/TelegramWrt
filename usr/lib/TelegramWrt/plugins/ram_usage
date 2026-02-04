@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "🛠️ RAM Usage:"
-echo ""
-
-free -h | awk 'NR==1 || /Mem/ {print "• " $0}'

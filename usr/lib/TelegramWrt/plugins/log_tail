@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "🛠️ System Log (last 20 lines):"
-echo ""
-
-logread | tail -n 20 | sed 's/^/• /'

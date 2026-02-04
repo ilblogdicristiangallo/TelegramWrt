@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "🛠️ System Uptime:"
-echo ""
-
-uptime | sed 's/^/• /'
