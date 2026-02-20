@@ -16,9 +16,9 @@ opkg install bash
 opkg install tcpdump
 </pre>
 
-## 📦 Requirements V1.0.6 (Dependency auto-install)
+## 📦 Requirements V1.0.7 (Dependency auto-install)
 <pre>opkg update
-opkg /tmp/install telegramwrt_1.0.6_all.ipk</pre>
+opkg /tmp/install telegramwrt_1.0.7_all.ipk</pre>
 
 ⚙️ Initial Configuration
 After installation, configure the bot by editing the file:
@@ -35,7 +35,7 @@ CHAT_ID="987654321"
 
 # 🚀 Installation
 Install the .ipk package with:
-<pre>opkg install /tmp/telegramwrt_1.0.6_all.ipk
+<pre>opkg install /tmp/telegramwrt_1.0.7_all.ipk
 </pre>
 
 The package installs the bot and all plugins under /usr/lib/TelegramWrt/.
@@ -151,13 +151,13 @@ Password: (your router password)
 
 Connect and navigate to the /tmp directory on the router.
 
-Drag and drop the telegramwrt_1.0.6_all.ipk file from your PC into the router’s /tmp folder.
+Drag and drop the telegramwrt_1.0.7_all.ipk file from your PC into the router’s /tmp folder.
 
 Open a terminal session directly from WinSCP (menu “Commands” → “Open Terminal”) or use PuTTY.
 
 Install the package with the command:
 
-<pre>opkg install /tmp/telegramwrt_1.0.6_all.ipk
+<pre>opkg install /tmp/telegramwrt_1.0.7_all.ipk
 </pre>
 
 # Screen use TelegramWrt_V1.0.5
